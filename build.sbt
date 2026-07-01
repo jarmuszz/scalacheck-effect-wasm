@@ -1,4 +1,3 @@
-ThisBuild / tlBaseVersion := "2.1"
 ThisBuild / version := "2.1-WASM"
 
 ThisBuild / developers += tlGitHubDev("mpilquist", "Michael Pilquist")
@@ -6,6 +5,8 @@ ThisBuild / startYear := Some(2021)
 
 ThisBuild / crossScalaVersions := List("3.3.8", "2.12.21", "2.13.18")
 ThisBuild / tlVersionIntroduced := Map("3" -> "1.0.2")
+
+ThisBuild / resolvers += "central-snapshots" at "https://central.sonatype.com/repository/maven-snapshots/"
 
 ThisBuild / libraryDependencySchemes +=
   "org.scala-native" %% "test-interface_native0.5" % VersionScheme.Always
@@ -19,8 +20,8 @@ lazy val core = crossProject(JSPlatform, JVMPlatform, NativePlatform)
   )
   .settings(
     libraryDependencies ++= List(
-      "org.scalacheck" %%% "scalacheck" % "1.19.0",
-      "org.typelevel" %%% "cats-core" % "2.13.0"
+      "org.scalacheck" %%% "scalacheck" % "1.19.0-66-3b1e58f-SNAPSHOT",
+      "org.typelevel" %%% "cats-core" % "2.13-WASM"
     )
   )
 
@@ -31,7 +32,7 @@ lazy val munit = crossProject(JSPlatform, JVMPlatform, NativePlatform)
   .dependsOn(core)
   .settings(
     libraryDependencies ++= List(
-      "org.scalameta" %%% "munit-scalacheck" % "1.3.0",
-      "org.typelevel" %%% "cats-effect" % "3.7.0" % Test
+      "org.scalameta" %%% "munit-scalacheck" % "1.3.0-WASM",
+      "org.typelevel" %%% "cats-effect" % "3.7-WASM" % Test
     )
   )
